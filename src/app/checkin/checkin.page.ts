@@ -1,18 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { CameraPreview, CameraPreviewPictureOptions, CameraPreviewOptions, CameraPreviewDimensions } from '@ionic-native/camera-preview/ngx';
-
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  selector: 'app-checkin',
+  templateUrl: './checkin.page.html',
+  styleUrls: ['./checkin.page.scss'],
 })
-export class Tab1Page {
+export class CheckinPage implements OnInit {
 
-  constructor(private camera: Camera
-  ) { }
+  base64Image: any;
+  constructor(private camera: Camera) { }
 
+  ngOnInit() {
+  }
   OpenCamera(){
     const options: CameraOptions = {
       quality: 100,
@@ -24,10 +24,9 @@ export class Tab1Page {
     this.camera.getPicture(options).then((imageData) => {
      // imageData is either a base64 encoded string or a file URI
      // If it's base64 (DATA_URL):
-     let base64Image = 'data:image/jpeg;base64,' + imageData;
+     this.base64Image = 'data:image/jpeg;base64,' + imageData;
     }, (err) => {
      // Handle error
     });
   }
-
 }
